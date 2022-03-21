@@ -7,7 +7,7 @@ public class JavaCalculator {
     private double total2 = 0.0;
     private char math_operator;
     private JPanel JavaCalculator;
-    private JTextField textField1;
+    private JTextField textField1 ;
     private JButton btnx2;
     private JButton btnplus;
     private JButton btnsqrt;
@@ -22,7 +22,7 @@ public class JavaCalculator {
     private JButton btn3;
     private JButton btnsin;
     private JButton btnminus;
-    private JButton btn3sqrt;
+    private JButton btntan;
     private JButton btn1;
     private JButton btn5;
     private JButton btn6;
@@ -32,6 +32,8 @@ public class JavaCalculator {
     private JButton btn0;
     private JButton btnclear;
     private JButton btnequal;
+    private JButton btndl;
+    private JButton btnneg;
 
     private void getoperator (String btnText) {
         math_operator = btnText.charAt(0);
@@ -40,6 +42,9 @@ public class JavaCalculator {
     }
 
     public JavaCalculator() {
+
+        textField1.setEditable(false);
+
         btn0.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -230,12 +235,32 @@ public class JavaCalculator {
                 total1 = 0;
             }
         });
-        btn3sqrt.addActionListener(new ActionListener() {
+        btntan.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                total2 = Math.pow(Double.parseDouble(textField1.getText()),1/3);
+                total2 = Math.tan(Double.parseDouble(textField1.getText()));
                 textField1.setText(Double.toString(total2));
                 total1 = 0;
+            }
+        });
+       btndl.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String str = textField1.getText();
+                textField1.setText("");
+                for(int i=0;i<str.length()-1;i++){
+                    textField1.setText(textField1.getText()+str.charAt(i));
+                }
+            }
+        });
+
+
+        btnneg.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                double temp = Double.parseDouble(textField1.getText());
+                temp*=-1;
+                textField1.setText(String.valueOf(temp));
             }
         });
     }
@@ -246,5 +271,6 @@ public class JavaCalculator {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+        frame.setSize(500,550);
     }
 }
